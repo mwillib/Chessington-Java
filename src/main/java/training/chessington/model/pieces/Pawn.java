@@ -18,38 +18,42 @@ public class Pawn extends AbstractPiece {
 
         ArrayList<Move> moves = new ArrayList<>();
 
+        checkRow(from, moves, board);
+
+        return moves;
+    }
+
+    private void checkRow(Coordinates from, ArrayList<Move> moves, Board board){
         if (getColour() == PlayerColour.WHITE) {
 
             if (from.getRow() == 6){
 
-                nextMove(from, -2, moves);
+                nextMove(from, -2, moves, board);
             }
             {
-                nextMove(from, -1, moves);
+                nextMove(from, -1, moves, board);
             }
-
-
         }
         else {
 
             if (from.getRow() == 1){
 
-                nextMove(from, 2, moves);
+                nextMove(from, 2, moves, board);
             }
             {
-                nextMove(from, 1, moves);
+                nextMove(from, 1, moves, board);
             }
         }
-
-        return moves;
     }
 
-    private static void nextMove(Coordinates from,int i, ArrayList<Move> moves){
+    private static void nextMove(Coordinates from,int i, ArrayList<Move> moves, Board board){
 
-        Coordinates to = new Coordinates(from.getRow() + i, from.getCol());
-        Move move = new Move(from, to);
-        moves.add(move);
+        Coordinates front = new Coordinates(from.getRow() + i, from.getCol());
+        if (board.get(front) == null) {
+            Coordinates to = new Coordinates(from.getRow() + i, from.getCol());
+            Move move = new Move(from, to);
+            moves.add(move);
+        }
     }
 
-    private static
 }
