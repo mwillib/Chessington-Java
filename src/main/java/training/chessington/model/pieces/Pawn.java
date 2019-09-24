@@ -18,21 +18,21 @@ public class Pawn extends AbstractPiece {
 
         ArrayList<Move> moves = new ArrayList<>();
 
-        checkRow(from, moves, board);
+        if (from.getRow() >= 1 && from.getRow() <= 6) {
+            addMove(from, moves, board);
+        }
 
         return moves;
     }
 
-    private void checkRow(Coordinates from, ArrayList<Move> moves, Board board){
+    private void addMove(Coordinates from, ArrayList<Move> moves, Board board){
         if (getColour() == PlayerColour.WHITE) {
 
             if (from.getRow() == 6){
 
                 nextMove(from, -2, moves, board);
             }
-            {
-                nextMove(from, -1, moves, board);
-            }
+            nextMove(from, -1, moves, board);
         }
         else {
 
@@ -40,9 +40,7 @@ public class Pawn extends AbstractPiece {
 
                 nextMove(from, 2, moves, board);
             }
-            {
-                nextMove(from, 1, moves, board);
-            }
+            nextMove(from, 1, moves, board);
         }
     }
 
