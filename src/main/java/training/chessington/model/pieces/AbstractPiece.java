@@ -17,15 +17,21 @@ public abstract class AbstractPiece implements Piece {
         this.colour = colour;
     }
 
+    protected boolean checkOnBoard(Coordinates from, int col, int row) {
+        Coordinates front = new Coordinates(from.getRow() + row, from.getCol() + col);
+
+        return front.getCol() >= 0 && front.getCol() <= 7 && front.getRow() >= 0 && front.getRow() <= 7;
+    }
+
     protected void nextTake(Coordinates from, int col, int row, ArrayList<Move> moves, Board board){
 
-        Coordinates front = new Coordinates(from.getRow() + col, from.getCol() + row);
+        Coordinates front = new Coordinates(from.getRow() + row, from.getCol() + col);
 
         if (front.getCol() >= 0 && front.getCol() <= 7 && front.getRow() >= 0 && front.getRow() <= 7) {
             Piece piece = board.get(front);
 
             if (piece != null && piece.getColour() != getColour()) {
-                Coordinates to = new Coordinates(from.getRow() + col, from.getCol() + row);
+                Coordinates to = new Coordinates(from.getRow() + row, from.getCol() + col);
                 Move move = new Move(from, to);
                 moves.add(move);
             }
