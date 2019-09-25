@@ -49,11 +49,11 @@ public class Pawn extends AbstractPiece {
         }
     }
 
-    private static void nextMove(Coordinates from,int i, ArrayList<Move> moves, Board board){
+    private static void nextMove(Coordinates from,int row, ArrayList<Move> moves, Board board){
 
-        Coordinates front = new Coordinates(from.getRow() + i, from.getCol());
+        Coordinates front = new Coordinates(from.getRow() + row, from.getCol());
         if (board.get(front) == null) {
-            Coordinates to = new Coordinates(from.getRow() + i, from.getCol());
+            Coordinates to = new Coordinates(from.getRow() + row, from.getCol());
             Move move = new Move(from, to);
             moves.add(move);
         }
@@ -70,18 +70,4 @@ public class Pawn extends AbstractPiece {
         }
     }
 
-    private void nextTake(Coordinates from,int i, int j, ArrayList<Move> moves, Board board){
-
-        Coordinates front = new Coordinates(from.getRow() + i, from.getCol() + j);
-
-        if (front.getCol() >= 0 && front.getCol() <= 7 && front.getRow() >= 0 && front.getRow() <= 7) {
-        Piece piece = board.get(front);
-
-            if (piece != null && piece.getColour() != getColour()) {
-                Coordinates to = new Coordinates(from.getRow() + i, from.getCol() + j);
-                Move move = new Move(from, to);
-                moves.add(move);
-            }
-        }
-    }
 }
